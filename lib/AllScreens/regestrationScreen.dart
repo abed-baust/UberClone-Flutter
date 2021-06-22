@@ -1,5 +1,6 @@
 import 'package:bismillah/AllScreens/loginScreen.dart';
 import 'package:bismillah/AllScreens/mainscreen.dart';
+import 'package:bismillah/AllWidgets/progressDialog.dart';
 import 'package:bismillah/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -146,7 +147,8 @@ class RegistrationScreen extends StatelessWidget {
                         } else if (phonetextEditingController.text.isEmpty) {
                           displayToastMessage(
                               "Phone Number is mandatory..", context);
-                        } else if (passwordtextEditingController.text.length < 6) {
+                        } else if (passwordtextEditingController.text.length <
+                            6) {
                           displayToastMessage(
                               "Password Must be atleast 6 Characters..",
                               context);
@@ -175,13 +177,24 @@ class RegistrationScreen extends StatelessWidget {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void registerNewUser(BuildContext context) async {
-   final User? firebaseUser = (await _firebaseAuth
-        .createUserWithEmailAndPassword(
-            email: emailtextEditingController.text,
-            password: passwordtextEditingController.text)
-        .catchError((errMsg) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return ProgressDialog(
+            message: "Registering please wait ...",
+          );
+        });
+
+    final User? firebaseUser = (await _firebaseAuth
+            .createUserWithEmailAndPassword(
+                email: emailtextEditingController.text,
+                password: passwordtextEditingController.text)
+            .catchError((errMsg) {
+      Navigator.pop(context);
       displayToastMessage(errMsg.toString(), context);
-    })).user;
+    }))
+        .user;
 
     if (firebaseUser != null) {
       Map userDataMap = {
@@ -191,9 +204,10 @@ class RegistrationScreen extends StatelessWidget {
       };
       userRef.child(firebaseUser.uid).set(userDataMap);
       displayToastMessage("Congratulations..", context);
-      Navigator.pushNamedAndRemoveUntil(context, MainScreen.idScreen, (route) => false);
-
+      Navigator.pushNamedAndRemoveUntil(
+          context, MainScreen.idScreen, (route) => false);
     } else {
+      Navigator.pop(context);
       displayToastMessage("New User has not been created..", context);
     }
   }
