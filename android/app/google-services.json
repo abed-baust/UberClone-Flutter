@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "990502187382",
+    "project_id": "flutter-uber-clone-e80f0",
+    "storage_bucket": "flutter-uber-clone-e80f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:990502187382:android:072a1b6d3638566f65ca57",
+        "android_client_info": {
+          "package_name": "com.abed.bismillah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "990502187382-kgfp96mt24dqqeu6voemkcdsopqp652s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACwkBdoJ96c9qCnLUT_Xk6Y83ntIOSepo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "990502187382-kgfp96mt24dqqeu6voemkcdsopqp652s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
